@@ -1,1 +1,1 @@
-# wd-201-amita-arora
+## This repository contains a program for DNS resolver in Ruby
