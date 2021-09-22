@@ -15,20 +15,19 @@ def parse_dns(original)
   mapped = Array.new
   mapped = original.map { |line| line.strip.split(",") }
   hash = Hash.new
-  hash = mapped.each_with_object({}) { |r, i| i[r[1].strip] = { type: r[0].strip, dest: r[2].strip } }
+  hash = mapped.each_with_object({}) { |record, i| i[record[1].strip] = { type: record[0].strip, destination: record[2].strip } }
   return hash
 end
 
 def resolve(dns_records, lookup_chain, domain)
-  rec = dns_records.fetch(domain, nil)
-  if rec == nil
+  fetched_record = dns_records.fetch(domain, nil)
+  if fetched_record == nil
     lookup_chain << "Error: record not found for #{domain}"
-  elsif rec[:type] == "A"
-    lookup_chain << rec[:dest]
-  elsif rec[:type] == "CNAME"
-    lookup_chain << rec[:dest]
-
-    resolve(dns_records, lookup_chain, rec[:dest])
+  elsif fetched_record[:type] == "A"
+    lookup_chain << fetched_record[:destination]
+  elsif fetched_record[:type] == "CNAME"
+    lookup_chain << fetched_record[:destination]
+    resolve(dns_records, lookup_chain, fetched_record[:destination])
   end
 end
 
