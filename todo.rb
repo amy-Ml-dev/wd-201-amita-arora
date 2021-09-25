@@ -25,7 +25,7 @@ class Todo
 
   def to_displayable_string
     completion_status = @completed ? "[X]" : "[ ]"
-    displayable_date = @due_date == Date.today ? nil : @due_date
+    displayable_date =  due_today? ? nil : @due_date
     "#{completion_status} #{@text} #{displayable_date}"
   end
 end
@@ -46,6 +46,7 @@ class TodosList
   def due_later
     TodosList.new(@todos.filter { |todo| todo.due_later? })
   end
+
 
   def add(todo)
     @todos.push(todo)
