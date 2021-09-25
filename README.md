@@ -1,1 +1,1 @@
-## This repository contains a program for DNS resolver and todo program in Ruby
+## This repository contains a programs for DNS resolver and todo in Ruby
