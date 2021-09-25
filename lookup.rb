@@ -18,7 +18,7 @@ def parse_dns(dns_raw)
     end
   .each_with_object({}) do |i, records|
            records[i[1]] = { :type => i[0], :destination => i[2] }
-         end
+    end
 end
 
 def resolve(dns_records, lookup_chain, domain)
@@ -35,11 +35,6 @@ end
 
 dns_records = parse_dns(dns_raw)
 
-lookup_chain = [domain]
-lookup_chain = resolve(dns_records, lookup_chain, domain)
-puts lookup_chain.join("=>")
-
-dns_records = parse_dns(dns_raw)
 lookup_chain = [domain]
 lookup_chain = resolve(dns_records, lookup_chain, domain)
 puts lookup_chain.join("=>")
